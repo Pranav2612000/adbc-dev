@@ -279,7 +279,7 @@ def build(
             "--",
             "bash",
             "-c",
-            f'cd /source/{driver_root.relative_to(repo_root)} && env {smuggle_env} go build -buildmode=c-shared {tags} -o /source/build/{target} -ldflags "{ldflags}" ./pkg',
+            f'cd /source/{driver_root.relative_to(repo_root)} && env {smuggle_env} go build -buildmode=shared {tags} -o /source/build/{target} -ldflags "{ldflags}" ./pkg',
         ]
         check_call(command, cwd=Path(__file__).parent, env=env)
     else:
@@ -287,7 +287,7 @@ def build(
             [
                 "go",
                 "build",
-                "-buildmode=c-shared",
+                "-buildmode=shared",
                 tags,
                 "-o",
                 f"{repo_root / 'build' / target}",
